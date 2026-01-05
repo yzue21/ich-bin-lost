@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Ich bin lost – Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <button onclick="showStudent()">Student View</button>
+  <button onclick="showLecturer()">Lecturer View</button>
+</header>
+
+
+<section id="studentView" class="view">
+  <h1>ICH BIN LOST</h1>
+
+  <button id="lostBtn" class="primary">
+    LOST<br>
+    BUTTON
+</button>
+
+  <div id="lostForm" class="hidden">
+    <label>
+      Wie lost bist du?
+<div class="sliderWrapper">
+  <input type="range" min="0" max="10" value="5">
+  <div class="scale">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+    <span>8</span>
+    <span>9</span>
+    <span>10</span>
+  </div>
+</div>
+    </label>
+
+    <textarea placeholder="Was ist unklar? (optional)"></textarea>
+
+    <button onclick="sendLost()">Senden</button>
+  </div>
+
+  <p id="studentFeedback"></p>
+
+  <div class="liveBox">
+    🔴 Aktuell lost: <strong>12 Studierende</strong>
+  </div>
+</section>
+
+<section id="lecturerView" class="view hidden">
+  <h1>Lost-Übersicht – Vorlesung</h1>
+
+  <div class="chartContainer">
+    <div class="yAxis">
+      <span>60</span>
+      <span>40</span>
+      <span>20</span>
+      <span>0</span>
+    </div>
+
+    <div class="chartArea">
+      <div class="threshold"></div>
+
+      <div class="bar green" style="height:40%"></div>
+      <div class="bar green" style="height:55%"></div>
+      <div class="bar red" style="height:80%"></div>
+      <div class="bar green" style="height:45%"></div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Zeit</th>
+      <th>Lost-Meldungen</th>
+      <th>Hinweis</th>
+    </tr>
+    <tr>
+      <td>10:15</td>
+      <td>18</td>
+      <td>Begriff unklar</td>
+    </tr>
+    <tr>
+      <td>10:30</td>
+      <td>32</td>
+      <td>Tempo zu hoch</td>
+    </tr>
+    <tr class="critical">
+      <td>10:45</td>
+      <td>55</td>
+      <td>Lost-Sturm</td>
+    </tr>
+  </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
