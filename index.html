@@ -62,45 +62,50 @@ Was ist unklar?
   <h1>Lost-Übersicht – Vorlesung</h1>
 
   <div class="chartContainer">
-    <div class="yAxis">
-      <span>60</span>
-      <span>40</span>
-      <span>20</span>
-      <span>0</span>
-    </div>
-
-    <div class="chartArea">
-      <div class="threshold"></div>
-
-      <div class="bar green" style="height:40%"></div>
-      <div class="bar green" style="height:55%"></div>
-      <div class="bar red" style="height:80%"></div>
-      <div class="bar green" style="height:45%"></div>
-    </div>
+  <div class="yAxis">
+    <span>60</span>
+    <span>40</span>
+    <span>20</span>
+    <span>0</span>
   </div>
 
-  <table>
-    <tr>
-      <th>Zeit</th>
-      <th>Lost-Meldungen</th>
-      <th>Hinweis</th>
-    </tr>
-    <tr>
-      <td>10:15</td>
-      <td>18</td>
-      <td>Begriff unklar</td>
-    </tr>
-    <tr>
-      <td>10:30</td>
-      <td>32</td>
-      <td>Tempo zu hoch</td>
-    </tr>
-    <tr class="critical">
-      <td>10:45</td>
-      <td>55</td>
-      <td>Lost-Sturm</td>
-    </tr>
-  </table>
+  <div class="chartArea">
+    <!-- Lost-Sturm Schwelle -->
+    <div class="threshold"></div>
+
+    <!-- 30-Minuten-Intervalle -->
+    <div class="bar green" style="height:40%" title="09:00–09:30"></div>
+    <div class="bar green" style="height:55%" title="09:30–10:00"></div>
+    <div class="bar red" style="height:80%" title="10:00–10:30 (Lost-Sturm)"></div>
+
+    <!-- Live-Balken -->
+    <div class="bar live" style="height:65%" title="Live: aktuell lost"></div>
+  </div>
+</div>
+
+
+<table class="lecturerTable">
+  <tr>
+    <th class="timeCol">Zeit</th>
+    <th class="slidesCol">Vorlesungsfolien</th>
+    <th>Was unklar ist</th>
+  </tr>
+  <tr>
+    <td class="timeCol">10:15</td>
+    <td class="slidesCol">Folie 3</td>
+    <td>Begriff nicht erklärt</td>
+  </tr>
+  <tr>
+    <td class="timeCol">10:30</td>
+    <td class="slidesCol">Folie 5</td>
+    <td>Zu schnell erklärt</td>
+  </tr>
+  <tr class="critical">
+    <td class="timeCol">10:45</td>
+    <td class="slidesCol">Folie 7</td>
+    <td>Beispiel fehlt</td>
+  </tr>
+</table>
 </section>
 
 <script src="script.js"></script>

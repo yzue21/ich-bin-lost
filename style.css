@@ -223,3 +223,28 @@ input[type="number"] {
   padding: 6px;
   margin-top: 6px;
 }
+
+
+.lecturerTable .timeCol {
+  width: 80px;
+  white-space: nowrap;
+}
+
+.lecturerTable .slidesCol {
+  width: 80px;
+  white-space: nowrap;
+}
+
+.bar.live::after {
+  content: "LIVE";
+  position: absolute;
+  bottom: -18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #e35b5b;
+}
+.bar.live {
+  background: #ff9800; /* Orange = Live */
+  border: 2px solid #e35b5b;
+}
+
