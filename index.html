@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -7,9 +7,12 @@
 </head>
 <body>
 
-<header>
-  <button onclick="showStudent()">Student View</button>
-  <button onclick="showLecturer()">Lecturer View</button>
+<header class="mainNav">
+  <div class="brand">ICH BIN LOST</div>
+  <div class="navActions">
+    <button class="ghost" onclick="showStudent()">Student View</button>
+    <button class="ghost" onclick="requestLecturerAccess()">Lecturer View</button>
+  </div>
 </header>
 
 
@@ -59,54 +62,62 @@ Was ist unklar?
 </section>
 
 <section id="lecturerView" class="view hidden">
-  <h1>Lost-Übersicht – Vorlesung</h1>
-
-  <div class="chartContainer">
-  <div class="yAxis">
-    <span>60</span>
-    <span>40</span>
-    <span>20</span>
-    <span>0</span>
+  <div class="lecturerTop">
+    <div>
+      <p class="eyebrow">Professor:innen-Ansicht</p>
+      <h1>Lost-Übersicht</h1>
+    </div>
+    <div class="lecturerNav">
+      <button class="navTab active" data-target="weeklySection">Wochenübersicht</button>
+      <button class="navTab" data-target="liveSection">Live-Sitzung</button>
+    </div>
   </div>
 
-  <div class="chartArea">
-    <!-- Lost-Sturm Schwelle -->
-    <div class="threshold"></div>
+  <div id="weeklySection" class="lecturerSection">
+    <p class="muted">Überblick pro Vorlesung mit Zeitachse in 30-Minuten-Schritten.</p>
+    <div id="weeklyCharts" class="weeklyGrid"></div>
+  </div>
 
-    <!-- 30-Minuten-Intervalle -->
-    <div class="bar green" style="height:40%" title="09:00–09:30"></div>
-    <div class="bar green" style="height:55%" title="09:30–10:00"></div>
-    <div class="bar red" style="height:80%" title="10:00–10:30 (Lost-Sturm)"></div>
+  <div id="liveSection" class="lecturerSection hidden">
+    <div id="liveChart"></div>
 
-    <!-- Live-Balken -->
-    <div class="bar live" style="height:65%" title="Live: aktuell lost"></div>
+    <table class="lecturerTable">
+      <tr>
+        <th class="timeCol">Zeit</th>
+        <th class="slidesCol">Vorlesungsfolien</th>
+        <th>Was unklar ist</th>
+      </tr>
+      <tr>
+        <td class="timeCol">10:15</td>
+        <td class="slidesCol">Folie 3</td>
+        <td>Begriff nicht erklärt</td>
+      </tr>
+      <tr>
+        <td class="timeCol">10:30</td>
+        <td class="slidesCol">Folie 5</td>
+        <td>Zu schnell erklärt</td>
+      </tr>
+      <tr class="critical">
+        <td class="timeCol">10:45</td>
+        <td class="slidesCol">Folie 7</td>
+        <td>Beispiel fehlt</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<div id="lecturerLock" class="lockOverlay hidden">
+  <div class="lockCard">
+    <h2>Professor:innen-Login</h2>
+    <p class="muted">Bitte Passwort eingeben, um die Ansicht zu öffnen.</p>
+    <input id="lockPassword" type="password" placeholder="Passwort" aria-label="Passwort">
+    <p id="lockFeedback" class="lockFeedback hidden">Falsches Passwort.</p>
+    <div class="lockActions">
+      <button class="ghost" onclick="closeLecturerLock()">Abbrechen</button>
+      <button class="primaryBtn" onclick="unlockLecturer()">Entsperren</button>
+    </div>
   </div>
 </div>
-
-
-<table class="lecturerTable">
-  <tr>
-    <th class="timeCol">Zeit</th>
-    <th class="slidesCol">Vorlesungsfolien</th>
-    <th>Was unklar ist</th>
-  </tr>
-  <tr>
-    <td class="timeCol">10:15</td>
-    <td class="slidesCol">Folie 3</td>
-    <td>Begriff nicht erklärt</td>
-  </tr>
-  <tr>
-    <td class="timeCol">10:30</td>
-    <td class="slidesCol">Folie 5</td>
-    <td>Zu schnell erklärt</td>
-  </tr>
-  <tr class="critical">
-    <td class="timeCol">10:45</td>
-    <td class="slidesCol">Folie 7</td>
-    <td>Beispiel fehlt</td>
-  </tr>
-</table>
-</section>
 
 <script src="script.js"></script>
 </body>

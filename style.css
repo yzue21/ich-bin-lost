@@ -14,20 +14,53 @@ h1, h3 {
   margin-top: 0;
 }
 
-
-header {
+.mainNav {
   background: #1f1f1f;
-  padding: 10px;
-  text-align: center;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
 }
 
-header button {
-  background: #fff;
-  border: none;
-  padding: 8px 16px;
-  margin: 0 5px;
+.brand {
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.navActions {
+  display: flex;
+  gap: 8px;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ghost:hover {
+  background: #fff;
+  color: #111;
+}
+
+.primaryBtn {
+  background: #1f1f1f;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.primaryBtn:hover {
+  background: #333;
 }
 
 
@@ -126,55 +159,6 @@ textarea {
   border-left: 5px solid #e35b5b;
 }
 
-
-.chartContainer {
-  display: flex;
-  margin-top: 20px;
-}
-
-.yAxis {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-right: 10px;
-  font-size: 13px;
-}
-
-.chartArea {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: 15px;
-  width: 100%;
-  height: 220px;
-  padding: 10px;
-  border-left: 2px solid #333;
-  border-bottom: 2px solid #333;
-  background: #fff;
-}
-
-.threshold {
-  position: absolute;
-  top: 30%;
-  left: 0;
-  right: 0;
-  border-top: 2px dashed #999;
-}
-
-
-.bar {
-  width: 40px;
-}
-
-.bar.green {
-  background: #6cc070;
-}
-
-.bar.red {
-  background: #e35b5b;
-}
-
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -235,16 +219,249 @@ input[type="number"] {
   white-space: nowrap;
 }
 
-.bar.live::after {
-  content: "LIVE";
+.lecturerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 6px;
+}
+
+.muted {
+  color: #666;
+}
+
+.lecturerNav {
+  display: inline-flex;
+  background: #fff;
+  padding: 6px;
+  border-radius: 12px;
+  gap: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.navTab {
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.navTab:hover {
+  background: #f4f4f4;
+}
+
+.navTab.active {
+  background: #1f1f1f;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.lecturerSection {
+  margin-top: 16px;
+}
+
+.weeklyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.chartCard {
+  background: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.chartTitle {
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chartShell {
+  display: flex;
+  gap: 12px;
+}
+
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+  padding-top: 4px;
+}
+
+.chartBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.plotFrame {
+  position: relative;
+  height: 240px;
+  border-left: 2px solid #333;
+  border-bottom: 2px solid #333;
+  background: #fafafa;
+  border-radius: 12px 12px 6px 6px;
+  overflow: visible;
+}
+
+.barGrid {
   position: absolute;
-  bottom: -18px;
-  font-size: 13px;
-  font-weight: bold;
+  inset: 8px 8px 24px 12px;
+  display: grid;
+  align-items: flex-end;
+  gap: 16px;
+  grid-template-columns: repeat(var(--segments, 1), 1fr);
+}
+
+.barSlot {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar {
+  width: 70%;
+  min-width: 22px;
+  border-radius: 6px 6px 2px 2px;
+  background: #6cc070;
+  position: relative;
+}
+
+.bar.green {
+  background: #6cc070;
+}
+
+.bar.red {
+  background: #e35b5b;
+}
+
+.bar.live {
+  background: #ff9800;
+  border: 2px solid #e35b5b;
+  box-shadow: 0 0 0 2px rgba(227, 91, 91, 0.15);
+}
+
+.threshold {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed #e35b5b;
+}
+
+.thresholdLabel {
+  position: absolute;
+  left: 10px;
+  transform: translateY(-5%);
+  font-size: 12px;
+  font-weight: 800;
   color: #e35b5b;
 }
-.bar.live {
-  background: #ff9800; /* Orange = Live */
-  border: 2px solid #e35b5b;
+
+.xAxis {
+  display: grid;
+  grid-template-columns: repeat(var(--segments, 1), 1fr);
+  gap: 16px;
+  margin-left: 12px;
+  padding: 12px 8px 0;
+  font-size: 12px;
+  color: #555;
+}
+
+.tick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tickMark {
+  width: 2px;
+  height: 8px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.tickLabel {
+  font-weight: 600;
+}
+
+.tickLabel-live {
+  color: #e35b5b;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e35b5b;
+  display: inline-block;
+  animation: liveBlink 1.2s ease-in-out infinite;
+}
+
+@keyframes liveBlink {
+  0% { opacity: 0.2; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.2; transform: scale(0.9); }
+}
+
+.lockOverlay {
+  position: fixed;
+  top: 76px;
+  right: 16px;
+  z-index: 10;
+}
+
+.lockCard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  width: min(420px, 100%);
+}
+
+.lockCard input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 10px 0 4px;
+  font-size: 14px;
+}
+
+.lockActions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.lockFeedback {
+  color: #e35b5b;
+  font-weight: 700;
+  margin: 4px 0 0;
 }
 
