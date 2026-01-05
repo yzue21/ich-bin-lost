@@ -217,3 +217,9 @@ tr.critical {
 .scale span {
   white-space: nowrap;
 }
+
+input[type="number"] {
+  width: 100%;
+  padding: 6px;
+  margin-top: 6px;
+}

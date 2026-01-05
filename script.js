@@ -20,3 +20,8 @@ function showLecturer() {
   document.getElementById("lecturerView").classList.remove("hidden");
   document.getElementById("studentView").classList.add("hidden");
 }
+const slideInput = document.getElementById("slideInput");
+
+slideInput.addEventListener("input", () => {
+  slideInput.value = slideInput.value.replace(/[^0-9]/g, "");
+});

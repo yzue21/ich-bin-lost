@@ -33,9 +33,21 @@
   </div>
 </div>
     </label>
+Was ist unklar?
+    <textarea placeholder="hier eingeben"></textarea>
 
-    <textarea placeholder="Was ist unklar? (optional)"></textarea>
-
+<label>
+  Welche Vorlesungsfolie ist unklar?
+  <input
+  type="number"
+  id="slideInput"
+  placeholder="z.B. 7"
+  min="1"
+  step="1"
+  inputmode="numeric"
+  pattern="[0-9]*"
+>
+</label>
     <button onclick="sendLost()">Senden</button>
   </div>
 
