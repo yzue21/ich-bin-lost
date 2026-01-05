@@ -203,21 +203,17 @@ tr.critical {
   padding: 0;
 }
 
-.sliderWrapper input[type="range"] {
+.sliderWrapper {
   width: 100%;
-  margin: 0;
 }
 
 .scale {
-  display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  display: flex;
+  justify-content: space-between;
   margin-top: 6px;
   font-size: 12px;
-
-  padding-left: 12px;
-  padding-right: 12px;
 }
 
 .scale span {
-  text-align: center;
+  white-space: nowrap;
 }
