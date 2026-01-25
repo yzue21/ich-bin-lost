@@ -17,7 +17,13 @@
 
 
 <section id="studentView" class="view">
-  <h1>ICH BIN LOST</h1>
+  <div class="studentHeader">
+    <h1>ICH BIN LOST</h1>
+    <div class="courseTag" title="Aktuelle Vorlesung">
+      <span class="courseLabel">Vorlesung</span>
+      <strong id="currentCourse">Mathe 1 – Lineare Algebra</strong>
+    </div>
+  </div>
 
   <button id="lostBtn" class="primary">
     LOST<br>
@@ -28,11 +34,17 @@
     <label>
       Wie lost bist du?
 <div class="sliderWrapper">
-  <input type="range" min="0" max="10" step="1" value="5">
+  <input id="lostSlider" type="range" min="0" max="10" step="1" value="5">
 
   <div class="scale">
     <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span>
     <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+  </div>
+  <div class="scaleLabels">
+    <span>Alles klar</span>
+    <span>Leichte Fragen</span>
+    <span>Teilweise lost</span>
+    <span>Komplett lost</span>
   </div>
 </div>
     </label>
@@ -54,7 +66,7 @@ Was ist unklar?
     <button onclick="sendLost()">Senden</button>
   </div>
 
-  <p id="studentFeedback"></p>
+  <p id="studentFeedback" class="hidden"></p>
 
   <div class="liveBox">
     🔴 Aktuell lost: <strong>12 Studierende</strong>

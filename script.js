@@ -8,6 +8,7 @@ const lecturerNavButtons = document.querySelectorAll(".lecturerNav .navTab");
 const lecturerLock = document.getElementById("lecturerLock");
 const lockPasswordInput = document.getElementById("lockPassword");
 const lockFeedback = document.getElementById("lockFeedback");
+const currentCourseLabel = document.getElementById("currentCourse");
 
 const LECTURER_PASSWORD = "prof123";
 let lecturerUnlocked = false;
@@ -20,9 +21,9 @@ const weeklyLectures = [
     threshold: 40,
     bars: [
       { time: "09:00", value: 18, color: "green" },
-      { time: "09:30", value: 32, color: "red" },
+      { time: "09:30", value: 42, color: "red", storm: true },
       { time: "10:00", value: 12, color: "green" },
-      { time: "10:30", value: 40, color: "red" }
+      { time: "10:30", value: 47, color: "red", storm: true }
     ]
   },
   {
@@ -33,8 +34,8 @@ const weeklyLectures = [
     bars: [
       { time: "10:00", value: 10, color: "green" },
       { time: "10:30", value: 20, color: "green" },
-      { time: "11:00", value: 44, color: "red" },
-      { time: "11:30", value: 28, color: "red" },
+      { time: "11:00", value: 55, color: "red", storm: true },
+      { time: "11:30", value: 42, color: "red", storm: true },
       { time: "12:00", value: 16, color: "green" }
     ]
   },
@@ -45,7 +46,7 @@ const weeklyLectures = [
     threshold: 40,
     bars: [
       { time: "08:30", value: 12, color: "green" },
-      { time: "09:00", value: 30, color: "red" },
+      { time: "09:00", value: 47, color: "red", storm: true },
       { time: "09:30", value: 8, color: "green" },
       { time: "10:00", value: 18, color: "green" }
     ]
@@ -59,9 +60,9 @@ const liveSession = {
   threshold: 40,
   bars: [
     { time: "09:00", value: 24, color: "green" },
-    { time: "09:30", value: 36, color: "red" },
+    { time: "09:30", value: 47, color: "red", storm: true },
     { time: "10:00", value: 12, color: "green" },
-    { time: "10:30", value: 52, color: "red" },
+    { time: "10:30", value: 60, color: "red", storm: true },
     { time: "11:00", value: 18, color: "green" }
   ],
   liveValue: 34
@@ -75,7 +76,9 @@ if (lostBtn && lostForm) {
 
 function sendLost() {
   if (studentFeedback && lostForm) {
-    studentFeedback.innerText = "✅ Dein Lost-Signal wurde gesendet.";
+    const courseName = currentCourseLabel?.innerText || "Vorlesung";
+    studentFeedback.innerText = `✅ Dein Lost-Signal für "${courseName}" wurde gesendet.`;
+    studentFeedback.classList.remove("hidden");
     lostForm.classList.add("hidden");
   }
 }
@@ -165,13 +168,14 @@ function createChartCard(config) {
   const { title, startTime, liveTime, threshold = 0, bars = [], liveValue } = config;
   const ticks = buildTicks(startTime, liveTime);
   const segments = Math.max(1, ticks.length - 1);
-  const maxValue = Math.max(
+  const maxCandidate = Math.max(
     ...bars.map((b) => b.value),
     threshold,
     liveValue || 0,
     10
   );
-  const yLabels = buildYAxis(maxValue);
+  const topValue = Math.max(10, Math.ceil(maxCandidate / 10) * 10 + 10);
+  const yLabels = buildYAxis(topValue);
 
   const card = document.createElement("div");
   card.className = "chartCard";
@@ -218,8 +222,15 @@ function createChartCard(config) {
     const slot = barGrid.children[slotIndex];
     const barEl = document.createElement("div");
     barEl.className = `bar ${bar.color || "green"}`;
-    barEl.style.height = `${(bar.value / maxValue) * 100}%`;
+    barEl.style.height = `${(bar.value / topValue) * 100}%`;
     barEl.title = `${bar.time} · ${bar.value} Lost-Meldungen`;
+    if (bar.storm || (threshold && bar.value >= threshold)) {
+      barEl.classList.add("stormBar");
+      const badge = document.createElement("div");
+      badge.className = "stormBadge";
+      badge.innerText = "⚠️ Lost-Sturm";
+      barEl.appendChild(badge);
+    }
     slot.appendChild(barEl);
   });
 
@@ -227,15 +238,23 @@ function createChartCard(config) {
     const liveSlot = barGrid.children[barGrid.children.length - 1];
     const liveBar = document.createElement("div");
     liveBar.className = "bar live";
-    liveBar.style.height = `${(liveValue / maxValue) * 100}%`;
+    liveBar.style.height = `${(liveValue / topValue) * 100}%`;
     liveBar.title = `Live (${liveTime}) · ${liveValue} Lost-Meldungen`;
+    if (threshold && liveValue >= threshold) {
+      liveBar.classList.add("stormBar");
+      const badge = document.createElement("div");
+      badge.className = "stormBadge";
+      badge.innerText = "⚠️ Lost-Sturm";
+      liveBar.appendChild(badge);
+    }
     liveSlot.appendChild(liveBar);
   }
 
   if (threshold) {
     const thresholdLine = document.createElement("div");
     thresholdLine.className = "threshold";
-    thresholdLine.style.bottom = "57%";
+    const thresholdPos = Math.min(100, (threshold / topValue) * 100);
+    thresholdLine.style.bottom = `${thresholdPos}%`;
 
     const thresholdLabel = document.createElement("span");
     thresholdLabel.className = "thresholdLabel";
